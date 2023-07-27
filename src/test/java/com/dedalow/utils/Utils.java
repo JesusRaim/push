@@ -1,17 +1,16 @@
 package com.dedalow.utils;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.ErrorManager;
@@ -22,29 +21,21 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.text.SimpleDateFormat;
 
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.UnknownHostException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-
-import com.dedalow.RunnerTest;
+import com.dedalow.Launcher;
 import com.dedalow.report.Report;
 import com.dedalow.SharedDependencies;
 import com.aventstack.extentreports.Status;
@@ -54,20 +45,23 @@ import com.aventstack.extentreports.Status;
  */
 public class Utils {
 
-    private static boolean check = true;
-    private static Logger logger = Logger.getLogger(RunnerTest.class.getName());
+    private static Logger logger = Logger.getLogger(Launcher.class.getName());
     private static Handler consoleHandler = initHandler();
     public static Properties prop;
 
     /**
      * Read config.properties file
-     * @return Properties
+     * @return prop
      * @throws Exception Error conditions to capture
      */
     public static Properties getConfigProperties() throws Exception {
-        prop = new Properties();
-        prop.load(new FileInputStream("config.properties"));
-        return prop;
+        try {
+            prop = new Properties();
+            prop.load(new FileInputStream("config.properties"));
+            return prop;
+        } catch (Exception e) {
+            throw new Exception ("Can not find config.properties file");
+        }
     }
 
     /**
@@ -76,7 +70,6 @@ public class Utils {
      * @return boolean
      */
     public static boolean isElementEnabled(WebElement element) {
-
         turnOffImplicitWaits();
         boolean result = element.isEnabled();
         turnOnImplicitWaits();
@@ -129,7 +122,6 @@ public class Utils {
                 } catch (Exception exception) {
                     reportError(null, exception, ErrorManager.FORMAT_FAILURE);
                 }
-
             }
 
             @Override
@@ -150,78 +142,14 @@ public class Utils {
         for (Handler handler : logger.getHandlers()) {
             logger.removeHandler(handler);
         }
-        logger = Logger.getLogger(RunnerTest.class.getName());
+        logger = Logger.getLogger(Launcher.class.getName());
         logger.setUseParentHandlers(false);
         logger.addHandler(consoleHandler);
         return logger;
     }
 
     /**
-     * Reads the features and scenarios the user wants to launch
-     * @return String
-     */
-    public static String selectExecution() {
-		String execution = "@7068cuvv";
-        try {
-            SharedDependencies.prop = getConfigProperties();
-            if (!SharedDependencies.prop.getProperty("FEATURE").isEmpty() || !SharedDependencies.prop.getProperty("SCENARIO").isEmpty()) {
-                execution = "";
-                if (!SharedDependencies.prop.getProperty("FEATURE").isEmpty()) {
-                    String[] features = SharedDependencies.prop.getProperty("FEATURE").split(", | |,");
-                    for (int i = 0; i < features.length; i++) {
-                        execution += '@' + features[i] + ',';
-                    }
-                }
-                if (!SharedDependencies.prop.getProperty("SCENARIO").isEmpty()) {
-                    String[] scenarios = SharedDependencies.prop.getProperty("SCENARIO").split(", | |,");
-                    for (int i = 0; i < scenarios.length; i++) {
-                        execution += '@' + scenarios[i] + "Scen,";
-                    }
-                }
-            }
-        } catch (Exception e) {
-			logger.warning("No connection established with properties file");
-            logger.info("All test will be executed");
-		}
-		return execution;
-	}
-
-    /**
-     * Reads user defined arguments
-     * @param options Scenario selection options
-     * @return String[]
-     */
-    public static String[] getArgumentsOptions(String[] options) {
-        for (int i = 0; i < options.length; i++) {
-            switch (options[i]) {
-                case "-g":
-                    String optionFeature = options[i+1];
-                    options[i+1] = "dedalow." + optionFeature.substring(0,1).toLowerCase() + optionFeature.substring(1);
-
-                    break;
-                case "-t":
-                    String optionScenario = options[i+1];
-
-                    if (optionScenario.contains("@")) {
-                        options[i+1] = "@" + optionScenario.substring(1,2).toUpperCase() + optionScenario.substring(2);
-                    } else {
-                        options[i+1] = "@" + optionScenario.substring(0,1).toUpperCase() + optionScenario.substring(1);
-                    }
-
-                    String extractScen = optionScenario.substring(optionScenario.length()-4, optionScenario.length());
-                    if (!extractScen.equals("Scen")) {
-                        options[i+1] = options[i+1] + "Scen";
-                    }
-
-                    break;
-            }
-        }
-
-        return options;
-    }
-
-    /**
-     * We read the SCREENSHOT property from the config.properties and we convert everything to lowercase
+     * Reads and convert to lower cases the SCREENSHOT property of the config.properties file
      * @return String
      * @throws Exception Error conditions to capture
      */
@@ -235,9 +163,79 @@ public class Utils {
             result = result.substring(0, spacePosition);
         }
 
-        if (!options.contains(result)) throw new Exception ("Selected option for variable SCREENSHOT in config.properties file is not correct");
+        if (!options.contains(result)) throw new Exception ("The option of the variable SCREENSHOT in the file config.properties is not correct. "
+				+ "It must contain one of these options: Always, Only on error or Never");
 
         return result;
+    }
+
+    /**
+     * Gets the TestCases to launch
+     * @return ArrayList with the names of the TestCase to be launched
+     * @throws Exception Error conditions to capture
+     */
+    public static ArrayList<String> getTestCasesSelected() throws Exception {
+    ArrayList<String> testCasesSelected = new ArrayList<String>();
+    if (!SharedDependencies.prop.getProperty("TESTSUITES").isEmpty() || !SharedDependencies.prop.getProperty("TESTCASES").isEmpty()) {
+
+        if (!SharedDependencies.prop.getProperty("TESTSUITES").isEmpty()) {
+            String[] testSuites = SharedDependencies.prop.getProperty("TESTSUITES").split(", | |,");
+            for (String suite : testSuites) {
+                String nameSuite = suite.substring(0, 1).toLowerCase() + suite.substring(1);
+                testCasesSelected = getTestCases(nameSuite, testCasesSelected);
+            }
+        }
+
+        if(!SharedDependencies.prop.getProperty("TESTCASES").isEmpty()) {
+            String[] testCases = SharedDependencies.prop.getProperty("TESTCASES").split(", | |,");
+            for (String testCase : testCases) {
+                ArrayList<String> listTestCases = new ArrayList<String>();
+                boolean testCaseExist = false;
+                String nameCase = testCase.substring(0, 1).toUpperCase() + testCase.substring(1);
+
+                listTestCases = getTestCases("complete", listTestCases);
+                for (String listCase : listTestCases) {
+                    if (listCase.matches(".+Test_" + nameCase)) {
+                        testCasesSelected.add(listCase);
+                        testCaseExist = true;
+                    }
+                }
+                if (!testCaseExist) {
+                    throw new Exception ("The TestCase " + nameCase + " does not exist");
+                }
+            }
+        }
+
+    } else {
+        testCasesSelected = getTestCases("complete", testCasesSelected);
+    }
+
+    return testCasesSelected;
+}
+
+    /**
+     * Gets the names of the TestCases
+     * @param option TestCases selection option
+     * @param testCases List of TestCases of the project
+     * @return ArrayList with the names of the TestCases
+     * @throws Exception Error conditions to capture
+     */
+    public static ArrayList<String> getTestCases(String option, ArrayList<String> testCases) throws Exception {
+        switch (option) {
+            case "testSuiteModel":
+            	testCases.add("com.dedalow.testSuiteModel.Test_TestCaseModel");
+			
+            break;
+			
+            case "complete":
+                	testCases.add("com.dedalow.testSuiteModel.Test_TestCaseModel");
+			
+                break;
+            default:
+                throw new Exception ("The TestSuite " + option + " does not exist");
+        }
+
+        return testCases;
     }
 
     /**
@@ -317,4 +315,5 @@ public class Utils {
       }
       return value;
     }
+
 }

@@ -1,7 +1,5 @@
 package com.dedalow.report;
 
-import com.dedalow.SharedDependencies;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,8 +7,12 @@ import java.util.Properties;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+import com.dedalow.utils.Utils;
+import com.dedalow.report.Report;
+import com.dedalow.SharedDependencies;
+
 /**
- * Configure Scenario for reporting in TestLink
+ * Configure TestCase for reporting in TestLink
  */
 public class TestCase {
 	public String name;
@@ -20,7 +22,7 @@ public class TestCase {
     public ArrayList<String> screenShootsPaths;
 
     /**
-     * Gets the name of the reference Scenario with TestLink server with screenshots
+     * Gets the name of the reference TestSuite with TestLink server with screenshots
      * @param name TestCase name
      * @param result TestCase Results
      * @param notes Notes
@@ -29,7 +31,7 @@ public class TestCase {
     public TestCase(String name, ArrayList<String> result, ArrayList<String> notes, ArrayList<String> screenShootsPaths) {
         this.name = name;
         this.result = result;
-        this.externalId = SharedDependencies.prop.getProperty("Testlink.scenario." + this.name);
+        this.externalId = SharedDependencies.prop.getProperty("Testlink.testCase." + this.name);
         this.notes = notes;
         this.screenShootsPaths = screenShootsPaths;
     }

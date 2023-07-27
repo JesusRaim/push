@@ -7,7 +7,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
     <groupId>java.com.dedalow</groupId>
-    <artifactId>7068cuvv</artifactId>
+    <artifactId>7068juhl</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
 	<developers>
@@ -34,7 +34,7 @@
 
 	<!-- Build and plugins -->
 	<build>
-		<finalName>7068cuvvExe</finalName>
+		<finalName>7068juhlExe</finalName>
 		<sourceDirectory>src/test/java</sourceDirectory>
 		<plugins>
 			<!-- Compile the project -->
@@ -78,7 +78,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.dedalow.RunnerTest</mainClass>
+							<mainClass>com.dedalow.Launcher</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -174,55 +174,7 @@
     </dependencyManagement>
 
 	<dependencies>
-		<!-- CUCUMBER -->
-        <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-core -->
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-core</artifactId>
-            <version>1.2.6</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-html -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-html</artifactId>
-            <version>0.2.7</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-java -->
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>1.2.6</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-junit -->
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>1.2.5</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/info.cukes/cucumber-picocontainer -->
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-picocontainer</artifactId>
-            <version>1.2.6</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-jvm-deps -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-jvm-deps</artifactId>
-            <version>1.0.6</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/info.cukes/gherkin -->
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>gherkin</artifactId>
-            <version>2.12.2</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine -->
-		<dependency>
-			<groupId>org.junit.vintage</groupId>
-			<artifactId>junit-vintage-engine</artifactId>
-			<version>5.9.1</version>
-		</dependency>
+		
 
 		<!-- SELENIUM -->
 		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->

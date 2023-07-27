@@ -12,16 +12,15 @@ import java.io.File;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LoggerContext;
 
-import com.dedalow.RunnerTest;
+import com.dedalow.Launcher;
 import com.dedalow.utils.*;
-import com.dedalow.SharedDependencies;
 
   /**
    * HTML Report
    */
 	public class ExtentHtml {
 		public static String resources =  System.getProperty("user.dir") + SharedDependencies.fileSystem.getSeparator() + "resources";
-		public static RunnerTest runnerTest = new RunnerTest();
+		public static Launcher launcher = new Launcher();
 		public static ExtentReports extent = new ExtentReports();
 		public static boolean isNotInitializated = false;
 		public static ExtentTest extentSuiteName;
@@ -44,16 +43,16 @@ import com.dedalow.SharedDependencies;
 
     /**
      * Initializes the HTML construction
-     * @param scenarioName Test case name
+     * @param caseName Test case name
      */
-		public ExtentHtml (String scenarioName) {
+		public ExtentHtml (String caseName) {
 			if (!isNotInitializated) {
 				createTest();
 				isNotInitializated = true;
 			}
 			try {
-				SharedDependencies.test = extent.createTest(scenarioName, SharedDependencies.reportDescription.replace("\n", "<br>"));
-				SharedDependencies.test.assignCategory(SharedDependencies.featureName);
+				SharedDependencies.test = extent.createTest(caseName, SharedDependencies.reportDescription.replace("\n", "<br>"));
+				SharedDependencies.test.assignCategory(SharedDependencies.suiteName);
 			} catch (IllegalArgumentException | SecurityException e) {
 				SharedDependencies.logger.severe(e.getMessage());
 			}
@@ -68,7 +67,7 @@ import com.dedalow.SharedDependencies;
 			LoggerContext context = (LoggerContext) LogManager.getContext(false);
 			File file = new File(resources + SharedDependencies.fileSystem.getSeparator() + "extentReports" + SharedDependencies.fileSystem.getSeparator() +"log4j.properties");
 			context.setConfigLocation(file.toURI());
-			htmlReporter = new ExtentHtmlReporter(SharedDependencies.folderLogs + SharedDependencies.fileSystem.getSeparator() + "7068cuvvResults.html");
+			htmlReporter = new ExtentHtmlReporter(SharedDependencies.folderLogs + SharedDependencies.fileSystem.getSeparator() + "7068juhlResults.html");
 			htmlReporter.loadXMLConfig(resources + SharedDependencies.fileSystem.getSeparator()+ "extentReports" + SharedDependencies.fileSystem.getSeparator() + "extent_config.xml");
 			customizeHtml(htmlReporter);
 			isNotInitializated = true;
