@@ -24,6 +24,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.But;
 import cucumber.api.java.en.Then;
 
+import com.dedalow.ContainerManager;
 
 
 public class StepDef {
@@ -37,9 +38,10 @@ public class StepDef {
     /**
      * Actions before Test execution
      * @param scenario Scenario to be executed
+	 * @throws IOException Error conditions to capture
      */
     @Before({"@TestSuiteModel"})
-    public void before(Scenario scenario)  {
+    public void before(Scenario scenario) throws IOException {
         try {
             setUp(scenario.getName());
 			SharedDependencies.setUpEnvironment("MAIN_CONTEXT");
@@ -63,6 +65,7 @@ public class StepDef {
         SharedDependencies.initialize.flush();
         DriverInit.clearWebDrivers();
         Report.finalReports();
+		ContainerManager.stopContainer();
     }
 
     

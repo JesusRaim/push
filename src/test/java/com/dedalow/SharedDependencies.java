@@ -91,7 +91,7 @@ import io.restassured.response.Response;
                 Utils.setEncoding();
                 screenshot = utils.configScreenshot();
                 timeout = Integer.parseInt(prop.getProperty("WEB_TIMEOUT"));
-                
+                ContainerManager.checkDocker();
           }
         }
 
@@ -129,7 +129,7 @@ import io.restassured.response.Response;
          * @throws Exception Error conditions to capture
          */
         public static void setUpEnvironment(String nameDriver) throws Exception {
-            driver = driverInit.driverSelector(nameDriver);
+            driver = driverInit.initDockerDriver(nameDriver, folderScenario);
             handler = driver.getWindowHandle();
             js = (JavascriptExecutor)driver;
         }

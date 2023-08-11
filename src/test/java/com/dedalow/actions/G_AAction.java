@@ -6,6 +6,8 @@ import com.dedalow.SharedDependencies;
 
 
 
+    import org.openqa.selenium.remote.LocalFileDetector;
+    import org.openqa.selenium.remote.RemoteWebElement;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
