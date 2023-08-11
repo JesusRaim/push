@@ -1,22 +1,23 @@
 package com.dedalow.actions;
 
-import com.dedalow.utils.Utils;
 import com.dedalow.report.Report;
 import com.dedalow.SharedDependencies;
+
+
+
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.List;
+import java.util.ArrayList;
 import java.time.Duration;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,17 +29,22 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.interactions.Actions;
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import io.restassured.response.Response;
 
 
-
-public class GivenaAction{
-
+public class G_AAction {
+    
+    
+    
     
 
     
-	public GivenaAction FrontEndNavigate () throws Exception {
+
+
+	public G_AAction FrontEndNavigate () throws Exception {
+		
 		
 		SharedDependencies.driver.get(SharedDependencies.prop.getProperty("WEB_URL") + "");
 		Report.frontScreenshotReportLog("Navigated to " + SharedDependencies.prop.getProperty("WEB_URL") + "", "INFO", 0, Status.PASS, false, "");
@@ -51,12 +57,11 @@ public class GivenaAction{
      * @param parameterBinding Name of linked variables
      * @throws Exception Error conditions to capture
      */
-    public void doGivenaAction(HashMap<String, String> variableList, Map<String, String> parameterBinding) throws Exception {
-    
-    
-		FrontEndNavigate();
-    
+    public void doG_AAction(HashMap<String, String> variableList, Map<String, String> parameterBinding) throws Exception {
 		
-    
+		
+
+		FrontEndNavigate();
+        
     }
 }

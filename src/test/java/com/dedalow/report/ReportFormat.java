@@ -26,7 +26,7 @@ public class ReportFormat extends Formatter {
 			server = "ERROR";
 		} else if ((record.getLevel().equals(Level.ALL)) || (record.getLevel().equals(Level.FINE))
 				|| (record.getLevel().equals(Level.FINER)) || (record.getLevel().equals(Level.FINEST))) {
-			
+
 			server = "DEBUG";
 		} else {
 			server = record.getLevel().toString();
@@ -38,5 +38,5 @@ public class ReportFormat extends Formatter {
 		builder.append("\n");
 		return builder.toString();
 	}
-	
+
 }
