@@ -19,6 +19,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import com.dedalow.ContainerManager;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -108,6 +110,7 @@ public class Test_TestCaseModel {
         Report.addResults();
         Report.finalReports(screenShot);
         SharedDependencies.initialize.flush();
+		ContainerManager.stopContainer();
     }
 
     /**

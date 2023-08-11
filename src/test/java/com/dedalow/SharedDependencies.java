@@ -90,7 +90,7 @@ public class SharedDependencies {
           driverInit = new DriverInit();
           level = prop.getProperty("LOG_LEVEL").trim().toUpperCase();
           Utils.setEncoding();
-          
+          ContainerManager.checkDocker();
           
       }
     }
@@ -129,7 +129,7 @@ public class SharedDependencies {
      * @throws Exception Error conditions to capture
      */
     public static void setUpEnvironment(String nameDriver) throws Exception {
-      driver = driverInit.driverSelector(nameDriver);
+      driver = driverInit.initDockerDriver(nameDriver, folderTestCase);
       handler = driver.getWindowHandle();
       js = (JavascriptExecutor)driver;
     }
