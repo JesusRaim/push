@@ -35,7 +35,7 @@ import com.dedalow.SharedDependencies;
 
 import com.aventstack.extentreports.Status;
 
-import com.dedalow.pages.DedalowPage;
+import com.dedalow.actions.GivenaAction;
 
 
 
@@ -43,7 +43,7 @@ public class Test_TestCaseModel {
 
     private static String reportDescription = "";
     
-	private static DedalowPage dedalowPage = new DedalowPage();
+	private static GivenaAction givenaAction = new GivenaAction();
 
     /**
      * Prepares the test for execution
@@ -74,11 +74,8 @@ public class Test_TestCaseModel {
             
 			Report.reportLog("Start of execution", "INFO", 0, Status.PASS, false, "");
 
-
-			SharedDependencies.driver.get(SharedDependencies.prop.getProperty("WEB_URL") + "");
-			Report.frontScreenshotReportLog("Navigated to " + SharedDependencies.prop.getProperty("WEB_URL") + "", "INFO", 0, Status.PASS, false, "");
-
-			dedalowPage.FrontEndAction();
+			givenaAction.doGivenaAction(null, null);
+			Report.reportLog("Action GivenaAction finished","INFO", 0, Status.PASS, false, "");
 
         } catch (AssertionError | Exception e) {
             Report.reportConsoleLogs(e.getMessage(), Level.SEVERE);

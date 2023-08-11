@@ -7,7 +7,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
     <groupId>java.com.dedalow</groupId>
-    <artifactId>7068juhl</artifactId>
+    <artifactId>7067smim</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
 	<developers>
@@ -34,7 +34,7 @@
 
 	<!-- Build and plugins -->
 	<build>
-		<finalName>7068juhlExe</finalName>
+		<finalName>7067smimExe</finalName>
 		<sourceDirectory>src/test/java</sourceDirectory>
 		<plugins>
 			<!-- Compile the project -->
