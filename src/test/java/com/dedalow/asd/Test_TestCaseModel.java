@@ -1,4 +1,4 @@
-package com.dedalow.testSuiteModel;
+package com.dedalow.asd;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -119,7 +119,7 @@ public class Test_TestCaseModel {
             SharedDependencies.init();
             SharedDependencies.screenshot = SharedDependencies.utils.configScreenshot();
         SharedDependencies.timeout = Integer.parseInt(SharedDependencies.prop.getProperty("WEB_TIMEOUT"));
-            SharedDependencies.defaultValues("TestSuiteModel", "Test_TestCaseModel", reportDescription);
+            SharedDependencies.defaultValues("Asd", "Test_TestCaseModel", reportDescription);
             SharedDependencies.initialize = new ExtentHtml("Test_TestCaseModel");
             SharedDependencies.test = SharedDependencies.initialize.getTest();
         } catch (Exception e) {
