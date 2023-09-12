@@ -1,7 +1,7 @@
-# PROJECT: 7067smim
-    This project contains automated tests based on a Java Selenium, Gherkin-Cucucmber and Maven architecture.
+# PROJECT: 7324tayz
+    This project contains automated tests based on a Java Selenium JUNIT 5 and Maven architecture.
 	In this project we can find features like:
-	Logs generation, automated screenshot creation and testlink integration.
+	Logs generation, automated screenshot creation, testlink integration, and usage of Excel files as input datasets for Test Cases.
 
 ### Requirements
 - In order to run this project from an IDE, the JAVA Virtual Machine or a JAVA code interpreter should be installed.
@@ -31,17 +31,17 @@ Below, some of the available parameters when executing a test using Chrome (we c
 
 For using one of this parameters:
 
-	WebDriver.DRIVER_OPTIONS = --no-sandbox
+	WebDriver.DRIVEROPTIONS = --no-sandbox
 
 For using multiple parameters, you should separate all parameters with comma and space:
 
-	WebDriver.DRIVER_OPTIONS = --no-sandbox, --window-size=1920,1080, --incognito
+	WebDriver.DRIVEROPTIONS = --no-sandbox, --window-size=1920,1080, --incognito
 
 **Configuring Browser:**
 
 We can choose between *Chrome, Firefox, Edge or Explorer* to run our Test Plan.
 
-	Webdriver.BROWSER = Chrome
+	Webdriver.DRIVER = Chrome
 
 We can select the driver version that we want, writting the number version.
 
@@ -62,19 +62,26 @@ Then, we have to change Internet Explorer's security:
 
 We can change the home page URL for your Test Plan
 
-    WEB_URL = https://dedalow.com/
+	WebDriver.HOME_PAGE = https://dedalow.com/
 
 **Configuring download folder path:**
 
 We can select any path, but if we don't change it, it will select it by default
 
-	FOLDER_DOWNLOAD = default
+	WebDriver.FOLDER_DOWNLOAD = default
 
 **Configuring the screenshot**
 
 We have 3 options for taking screenshots: Always, Only on error and Never. Any other value will generate an error and tests will not be executed. By default, Always will be selected
 
-    Application example: SCREENSHOT = Always.
+	Application example: SCREENSHOT = Always
+
+**Excel:**
+
+We can use an Excel file as data set, then the test will be executed as many times as different rows we have defined in the Excel.
+Here we can change excel's path:
+
+	EXCEL = C:/Users/dedalow/excel/example.xlsx
 
 **Logger level:**
 
@@ -86,19 +93,19 @@ We can choose between *INFO* or *DEBUG* options, depending on detailed informati
 
 We can modify timeout value for all Test Plan
 
-	WEB.TIMEOUT = 20
+	WebDriver.TIMEOUT = 20
 
 **Backend Home page**
 
 We can change backend's home page URL for your api tests
 
-    BACKEND_ENDPOINT = https://dedalow.com/
+	RestAssure.BACKEND_HOME_URL = https://dedalow.com/
 
 **Backend Timeout**
 
 We can modify backend's timeout value for all api tests
 
-    BACKEND_TIMEOUT = 20
+	RestAssure.BACKEND_TIMEOUT = 20
 
 **Configurating Testlink:**
 
@@ -130,63 +137,67 @@ We have one for each testCase to set testlink testCase name configuration
 
     Testlink.testCase.Test_caseName = caseName
 
-### How execute using JAVA/CUCUMBER
+### How execute using JAVA
 
 **Config.properties configuration**
 
-Selecting the only a scenario that we want to execute (scenarioName = name of the Scenario without spaces):
+Selecting the only TestCase that we want to execute (caseName = name of the Test Case without spaces):
 
-    SCENARIO = scenarioName
+	TESTCASES = caseName
 
-Selecting various Scenarios that we want to execute (Separation using space or coma):
+Selecting various TestCases that we want to execute (Separation using space or coma):
 
-    SCENARIO = scenarioName1 scenarioName2
+	TESTCASES = caseName1 caseName2
 
-Selecting one feature from the Test Plan (featureName = name of the Feature without spaces):
+Selecting one Suite from the Test Plan (nameSuite = name of the Test Suite without spaces):
 
-    FEATURE = featureName
+	TESTSUITES = nameSuite
 
 Selecting various Suites from the Test Plan (Separation using space or coma)
 
-    FEATURE = featureName1, featureName2
+	TESTSUITES = nameSuite1, nameSuite2
 
 Selecting all Test Plan, set blank both properties
 
-    FEATURE =
-    SCENARIO =
+	TESTSUITES =
+	TESTCASES =
 
 **Run jar file reading config.properties file configuration, execute this command from the target folder**
 
-	java -jar 7067smimExe.jar
+	java -jar 7324tayzExe.jar
 
 ### How execute using MAVEN
 
-**Run the entire project (All features included with no parameters), execute this command from the root folder**
+**Run the entire project (All suites included with no parameters), execute this command from the root folder**
 
 	mvn test
 
 **Run using parametrized execution, execute these commands from the root folder**
 
-Run by selecting the only Scenario that we want to execute (scenarioName = name of the Scenario without spaces)
+Run by selecting the only TestCase that we want to execute (caseName = name of the Test Case without spaces)
 
-    mvn test -Dcucumber.options="--tags @scenarioNameScen"
+	mvn -Dtest=Test_caseName test
 
-Run by selecting various Scenarios that we want to execute
+Run by selecting various TestCases that we want to execute
 
-    mvn test -Dcucumber.options="--tags @scenarioName1Scen,@scenarioName2Scen,@scenarioName3Scen"
+	mvn -Dtest=Test_caseName1,Test_caseName2 test
 
-Run only one Feature from the Test Plan (featureName = name of the Feature without spaces)
+Run only one Suite from the Test Plan (nameSuite = name of the Test Suite without spaces)
 
-    mvn test -Dcucumber.options="--tags @featureName"
+	mvn -Dtest=com.dedalow.nameSuite.Test* test
 
-Run by selecting various Features from the Test Plan
+Run by selecting various Suites from the Test Plan
 
-    mvn test -Dcucumber.options="--tags @featureName1,@featureName2"
+	mvn -Dtest=com.dedalow.nameSuite1.Test*,com.dedalow.nameSuite2.Test* test
 
 ### FAQ
 Test is not executed because the driver is not updated and no message is displayed
 
 	Update the driver and try again
+
+Excel dataset is not correctly referenced
+
+	Check the excel dataset URL in the config file.
 
 I don’t know how to open the console in the unzipped folder
 
@@ -195,6 +206,6 @@ I don’t know how to open the console in the unzipped folder
 	You can also type cmd into the Windows File Explorer address bar (use Ctrl+L to focus the address bar) and then press Enter to open the shell.
 
 
-## This project has follow Features & Scenarios available
+## This project has follow TestSuites & TestCases available
 **TestSuiteModel**
 - TestCaseModel
