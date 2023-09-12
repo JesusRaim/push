@@ -222,13 +222,13 @@ public class Utils {
      */
     public static ArrayList<String> getTestCases(String option, ArrayList<String> testCases) throws Exception {
         switch (option) {
-            case "asd":
-            	testCases.add("com.dedalow.asd.Test_TestCaseModel");
+            case "fgt":
+            	testCases.add("com.dedalow.fgt.Test_TestCaseModel");
 			
             break;
 			
             case "complete":
-                	testCases.add("com.dedalow.asd.Test_TestCaseModel");
+                	testCases.add("com.dedalow.fgt.Test_TestCaseModel");
 			
                 break;
             default:
