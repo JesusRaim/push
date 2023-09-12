@@ -67,7 +67,7 @@ import com.dedalow.utils.*;
 			LoggerContext context = (LoggerContext) LogManager.getContext(false);
 			File file = new File(resources + SharedDependencies.fileSystem.getSeparator() + "extentReports" + SharedDependencies.fileSystem.getSeparator() +"log4j.properties");
 			context.setConfigLocation(file.toURI());
-			htmlReporter = new ExtentHtmlReporter(SharedDependencies.folderLogs + SharedDependencies.fileSystem.getSeparator() + "7324tannResults.html");
+			htmlReporter = new ExtentHtmlReporter(SharedDependencies.folderLogs + SharedDependencies.fileSystem.getSeparator() + "7324tayzResults.html");
 			htmlReporter.loadXMLConfig(resources + SharedDependencies.fileSystem.getSeparator()+ "extentReports" + SharedDependencies.fileSystem.getSeparator() + "extent_config.xml");
 			customizeHtml(htmlReporter);
 			isNotInitializated = true;
