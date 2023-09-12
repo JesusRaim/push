@@ -1,4 +1,4 @@
-# PROJECT: 7324tayz
+# PROJECT: 7324tann
     This project contains automated tests based on a Java Selenium JUNIT 5 and Maven architecture.
 	In this project we can find features like:
 	Logs generation, automated screenshot creation, testlink integration, and usage of Excel files as input datasets for Test Cases.
@@ -164,7 +164,7 @@ Selecting all Test Plan, set blank both properties
 
 **Run jar file reading config.properties file configuration, execute this command from the target folder**
 
-	java -jar 7324tayzExe.jar
+	java -jar 7324tannExe.jar
 
 ### How execute using MAVEN
 
