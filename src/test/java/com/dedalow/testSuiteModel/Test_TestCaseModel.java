@@ -1,4 +1,4 @@
-package com.dedalow.testSuiteMoadel;
+package com.dedalow.testSuiteModel;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -73,8 +73,8 @@ public class Test_TestCaseModel {
 			Report.reportLog("Start of execution", "INFO", 0, Status.PASS, false, "");
 
 
-			SharedDependencies.driver.get("asd");
-			Report.frontScreenshotReportLog("Navigated to " + "asd", "INFO", 0, Status.PASS, false, "");
+			SharedDependencies.driver.get(SharedDependencies.prop.getProperty("WEB_URL") + "");
+			Report.frontScreenshotReportLog("Navigated to " + SharedDependencies.prop.getProperty("WEB_URL") + "", "INFO", 0, Status.PASS, false, "");
 
         } catch (AssertionError | Exception e) {
             Report.reportConsoleLogs(e.getMessage(), Level.SEVERE);
@@ -119,7 +119,7 @@ public class Test_TestCaseModel {
             SharedDependencies.init();
             SharedDependencies.screenshot = SharedDependencies.utils.configScreenshot();
         SharedDependencies.timeout = Integer.parseInt(SharedDependencies.prop.getProperty("WEB_TIMEOUT"));
-            SharedDependencies.defaultValues("TestSuiteMoadel", "Test_TestCaseModel", reportDescription);
+            SharedDependencies.defaultValues("TestSuiteModel", "Test_TestCaseModel", reportDescription);
             SharedDependencies.initialize = new ExtentHtml("Test_TestCaseModel");
             SharedDependencies.test = SharedDependencies.initialize.getTest();
         } catch (Exception e) {
