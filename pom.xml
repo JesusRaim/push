@@ -7,7 +7,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
     <groupId>java.com.dedalow</groupId>
-    <artifactId>7324tann</artifactId>
+    <artifactId>awx</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
 	<developers>
@@ -34,7 +34,7 @@
 
 	<!-- Build and plugins -->
 	<build>
-		<finalName>7324tannExe</finalName>
+		<finalName>awxExe</finalName>
 		<sourceDirectory>src/test/java</sourceDirectory>
 		<plugins>
 			<!-- Compile the project -->

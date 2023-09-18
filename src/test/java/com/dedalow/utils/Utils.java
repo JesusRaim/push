@@ -222,14 +222,12 @@ public class Utils {
      */
     public static ArrayList<String> getTestCases(String option, ArrayList<String> testCases) throws Exception {
         switch (option) {
-            case "a":
-            	testCases.add("com.dedalow.a.Test_TestCaseModel");
-			
+            case "testSuiteModel":
+            
             break;
 			
             case "complete":
-                	testCases.add("com.dedalow.a.Test_TestCaseModel");
-			
+                
                 break;
             default:
                 throw new Exception ("The TestSuite " + option + " does not exist");

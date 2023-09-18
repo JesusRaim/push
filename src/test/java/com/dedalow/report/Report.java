@@ -114,28 +114,7 @@ public class Report {
 
 	
 
-	/**
-	* Performs log reports with frontend screenshots
-	*
-	* @param msg Message
-	* @param logLevel Level of the log
-	* @param wait Waiting time
-	* @param status Test result
-	* @param isError Is an exception report
-	* @param debugMsg Debug message
-	*/
-	public static void frontScreenshotReportLog(String msg, String logLevel, int wait, Status status, boolean isError,
-												String debugMsg) {
-		if (!isError) {
-			try {
-				capScreenFrequency(SharedDependencies.screenshot, (TakesScreenshot) SharedDependencies.driver);
-			} catch (Exception e) {
-				SharedDependencies.logger.severe(e.getMessage());
-				SharedDependencies.test.log(status, msg);
-			}
-		}
-		reportLog(msg, logLevel, wait, status, isError, debugMsg);
-	}
+	
 
   /**
    * Performs log reports.
