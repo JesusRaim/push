@@ -1,4 +1,4 @@
-# PROJECT: awx
+# PROJECT: 7324smkg
     This project contains automated tests based on a Java Selenium JUNIT 5 and Maven architecture.
 	In this project we can find features like:
 	Logs generation, automated screenshot creation, testlink integration, and usage of Excel files as input datasets for Test Cases.
@@ -164,7 +164,7 @@ Selecting all Test Plan, set blank both properties
 
 **Run jar file reading config.properties file configuration, execute this command from the target folder**
 
-	java -jar awxExe.jar
+	java -jar 7324smkgExe.jar
 
 ### How execute using MAVEN
 
@@ -207,4 +207,5 @@ I don’t know how to open the console in the unzipped folder
 
 
 ## This project has follow TestSuites & TestCases available
-**TestSuiteModel**
+**Suite1**
+- TestCaseModel
